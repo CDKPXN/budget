@@ -90,7 +90,7 @@
               <div class="panel-heading">Base Urls</div>
               <div class="panel-body">
                 
-                    <p>Production : <strong>http://localhost</strong></p>
+                    <p>Production : <strong>http://192.168.99.1</strong></p>
                 
                     <p>Staging : <strong></strong></p>
                 
@@ -119,6 +119,8 @@
                 <li role="presentation"><a href="#9top" role="tab" data-toggle="tab">GET : /api/staff</a></li>
             
                 <li role="presentation"><a href="#10top" role="tab" data-toggle="tab">PUT : /api/staff/5d10966b37bcd55434e92212</a></li>
+            
+                <li role="presentation"><a href="#11top" role="tab" data-toggle="tab">GET : /api</a></li>
             
         <ul>
     </div>
@@ -3413,6 +3415,69 @@
                         try {
                             var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"weizijie\",\"job\":\"coder\",\"status\":1}}");
                             document.getElementById('response-body-10-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="11top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Upgrade-Insecure-Requests</td>
+                        <td>  1</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-11-0">&#34;ok&#34;</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("\"ok\"");
+                            document.getElementById('response-body-11-0').innerHTML = syntaxHighlight(jsonStr);
                         } catch (e) {
                              
                         }

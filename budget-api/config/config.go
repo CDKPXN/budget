@@ -13,7 +13,7 @@ var (
 
 // New 返回一个toml.Tree的单例实例
 func New() *toml.Tree {
-	config, err := toml.LoadFile("./config/config.toml")
+	config, err := toml.LoadFile("./config.toml")
 
 	if err != nil {
 		fmt.Println("TomlError ", err.Error())

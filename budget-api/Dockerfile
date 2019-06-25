@@ -1,7 +1,9 @@
-FROM scratch
-WORKDIR /
-ADD ./budget-api /
-ADD ./config/config.toml /config/
+FROM busybox
+WORKDIR /home
+ADD ./budget-api /home/budget-api
+ADD ./config/config.toml /home/config.toml
 EXPOSE 80
-
-ENTRYPOINT ["./budget-api"]
+# USER root
+RUN chmod +x /home/budget-api
+RUN ls -l /home/
+ENTRYPOINT ["/home/budget-api"]
