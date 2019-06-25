@@ -1,0 +1,3431 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title> API Documentation </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>   
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hidden {
+            display:none;
+        }
+        pre {
+            outline: 1px solid #ccc;
+            padding: 5px; margin: 5px;
+        }
+
+        .string { color: green; }
+        .number { color: darkorange; }
+        .boolean { color: blue; }
+        .null { color: magenta; }
+        .key { color: red; }
+
+    </style>
+    <style type="text/css">
+        pre.prettyprint {
+            border: 1px solid #ccc;
+            margin-bottom: 0;
+            padding: 9.5px;
+        }
+    </style>
+    <script>
+         
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function spaceJson(json){
+            var validJson = JSON.parse(json);
+            return JSON.stringify(validJson, undefined, 4);
+        }
+    </script>
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">budget-api</a>
+            <p class="navbar-text">Developed by Gophers at <a href="http://betacraft.co">Betacraft</a></p>
+        </div>
+            
+        
+    </div>
+    
+</nav>
+<div class="container-fluid" style="margin-top: 70px;margin-bottom: 20px;">
+    <div class="container-fluid">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+              <div class="panel-heading">Base Urls</div>
+              <div class="panel-body">
+                
+                    <p>Production : <strong>http://localhost</strong></p>
+                
+                    <p>Staging : <strong></strong></p>
+                
+              </div>
+            </div>    
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+            
+                <li role="presentation"><a href="#0top" role="tab" data-toggle="tab">POST : /api/finance</a></li>
+            
+                <li role="presentation"><a href="#1top" role="tab" data-toggle="tab">GET : /api/finance</a></li>
+            
+                <li role="presentation"><a href="#2top" role="tab" data-toggle="tab">PUT : /api/finance/5d1096aa37bcd528e88fe949</a></li>
+            
+                <li role="presentation"><a href="#3top" role="tab" data-toggle="tab">POST : /api/project</a></li>
+            
+                <li role="presentation"><a href="#4top" role="tab" data-toggle="tab">GET : /api/project</a></li>
+            
+                <li role="presentation"><a href="#5top" role="tab" data-toggle="tab">PUT : /api/project/5d1095cb37bcd5575cc53bc6</a></li>
+            
+                <li role="presentation"><a href="#6top" role="tab" data-toggle="tab">POST : /api/project/5d1095cb37bcd5575cc53bc6/workload</a></li>
+            
+                <li role="presentation"><a href="#7top" role="tab" data-toggle="tab">DELETE : /api/project/5d1095cb37bcd5575cc53bc6</a></li>
+            
+                <li role="presentation"><a href="#8top" role="tab" data-toggle="tab">POST : /api/staff</a></li>
+            
+                <li role="presentation"><a href="#9top" role="tab" data-toggle="tab">GET : /api/staff</a></li>
+            
+                <li role="presentation"><a href="#10top" role="tab" data-toggle="tab">PUT : /api/staff/5d10966b37bcd55434e92212</a></li>
+            
+        <ul>
+    </div>
+    <div class="col-md-8 tab-content">
+        
+        <div id="0top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-0" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-0">{&#34;status&#34;:false,&#34;msg&#34;:&#34;failed&#34;,&#34;data&#34;:null}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":false,\"msg\":\"failed\",\"data\":null}");
+                            document.getElementById('response-body-0-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-1" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:08.9128107&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:49:08.9128107+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}}");
+                            document.getElementById('response-body-0-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-2" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:43.9210017&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:55:43.9210017+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}}");
+                            document.getElementById('response-body-0-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-3" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.0916345&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:57:54.0916345+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}}");
+                            document.getElementById('response-body-0-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-4" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.4797474&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T18:06:47.4797474+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}}");
+                            document.getElementById('response-body-0-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-0-5" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:1.9,&#34;hydropower_property&#34;:1.7,&#34;management_cost&#34;:1.6,&#34;public_accumulation_fund&#34;:2.2,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;travel&#34;:1.8}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":1.9,\"hydropower_property\":1.7,\"management_cost\":1.6,\"public_accumulation_fund\":2.2,\"salary\":2,\"social_security\":2.1,\"travel\":1.8}");
+                            document.getElementById('request-body-0-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-0-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:13.6933708&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T18:08:13.6933708+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}}");
+                            document.getElementById('response-body-0-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="1top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:23:54.804&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:23:54.804+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:08.912&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:49:08.912+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:43.921&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:55:43.921+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.091&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T17:57:54.091+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.479&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T18:06:47.479+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-1-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:13.693&#43;08:00&#34;,&#34;management_cost&#34;:1.6,&#34;hydropower_property&#34;:1.7,&#34;travel&#34;:1.8,&#34;entertain&#34;:1.9,&#34;salary&#34;:2,&#34;social_security&#34;:2.1,&#34;public_accumulation_fund&#34;:2.2}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"2019-06-24T18:08:13.693+08:00\",\"management_cost\":1.6,\"hydropower_property\":1.7,\"travel\":1.8,\"entertain\":1.9,\"salary\":2,\"social_security\":2.1,\"public_accumulation_fund\":2.2}]}");
+                            document.getElementById('response-body-1-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="2top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-2-0" class="prettyprint">{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;entertain&#34;:2.4,&#34;hydropower_property&#34;:2.2,&#34;management_cost&#34;:2.1,&#34;public_accumulation_fund&#34;:2.7,&#34;salary&#34;:2.5,&#34;social_security&#34;:2.6,&#34;travel&#34;:2.3}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1096aa37bcd528e88fe949\",\"entertain\":2.4,\"hydropower_property\":2.2,\"management_cost\":2.1,\"public_accumulation_fund\":2.7,\"salary\":2.5,\"social_security\":2.6,\"travel\":2.3}");
+                            document.getElementById('request-body-2-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-2-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1096aa37bcd528e88fe949&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;management_cost&#34;:2.1,&#34;hydropower_property&#34;:2.2,&#34;travel&#34;:2.3,&#34;entertain&#34;:2.4,&#34;salary&#34;:2.5,&#34;social_security&#34;:2.6,&#34;public_accumulation_fund&#34;:2.7}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1096aa37bcd528e88fe949\",\"ctime\":\"0001-01-01T00:00:00Z\",\"management_cost\":2.1,\"hydropower_property\":2.2,\"travel\":2.3,\"entertain\":2.4,\"salary\":2.5,\"social_security\":2.6,\"public_accumulation_fund\":2.7}}");
+                            document.getElementById('response-body-2-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="3top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-0" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-0">{&#34;status&#34;:false,&#34;msg&#34;:&#34;failed&#34;,&#34;data&#34;:null}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":false,\"msg\":\"failed\",\"data\":null}");
+                            document.getElementById('response-body-3-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-1" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:09.1930621&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:49:09.1930621&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:49:09.1930621+08:00\",\"mtime\":\"2019-06-24T17:49:09.1930621+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":1}}");
+                            document.getElementById('response-body-3-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-2" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:44.1055068&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:55:44.1055068&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:55:44.1055068+08:00\",\"mtime\":\"2019-06-24T17:55:44.1055068+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":1}}");
+                            document.getElementById('response-body-3-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-3" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.3160353&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:57:54.3160353&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:57:54.3160353+08:00\",\"mtime\":\"2019-06-24T17:57:54.3160353+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":1}}");
+                            document.getElementById('response-body-3-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-4" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.7140895&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:06:47.7140895&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T18:06:47.7140895+08:00\",\"mtime\":\"2019-06-24T18:06:47.7140895+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":1}}");
+                            document.getElementById('response-body-3-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-3-5" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"测试项目\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":1}");
+                            document.getElementById('request-body-3-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-3-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:13.8389803&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:08:13.8389803&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T18:08:13.8389803+08:00\",\"mtime\":\"2019-06-24T18:08:13.8389803+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":1}}");
+                            document.getElementById('response-body-3-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="4top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:20:11.566&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:47:41.641&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[{&#34;time&#34;:&#34;2019-06-24T17:40:20.336&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]},{&#34;time&#34;:&#34;2019-06-24T17:41:37.572&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]},{&#34;time&#34;:&#34;2019-06-24T17:42:33.904&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]},{&#34;time&#34;:&#34;2019-06-24T17:44:27.287&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]},{&#34;time&#34;:&#34;2019-06-24T17:47:41.514&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}],&#34;status&#34;:1},{&#34;_id&#34;:&#34;5d1095e637bcd54e88ae7c06&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:20:38.665&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:20:38.665&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:20:11.566+08:00\",\"mtime\":\"2019-06-24T17:47:41.641+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[{\"time\":\"2019-06-24T17:40:20.336+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]},{\"time\":\"2019-06-24T17:41:37.572+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]},{\"time\":\"2019-06-24T17:42:33.904+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]},{\"time\":\"2019-06-24T17:44:27.287+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]},{\"time\":\"2019-06-24T17:47:41.514+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}],\"status\":1},{\"_id\":\"5d1095e637bcd54e88ae7c06\",\"ctime\":\"2019-06-24T17:20:38.665+08:00\",\"mtime\":\"2019-06-24T17:20:38.665+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:09.193&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:49:09.193&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:49:09.193+08:00\",\"mtime\":\"2019-06-24T17:49:09.193+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:44.105&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:55:44.105&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:55:44.105+08:00\",\"mtime\":\"2019-06-24T17:55:44.105+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.316&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:57:54.316&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T17:57:54.316+08:00\",\"mtime\":\"2019-06-24T17:57:54.316+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.714&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:06:47.714&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T18:06:47.714+08:00\",\"mtime\":\"2019-06-24T18:06:47.714+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-4-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:13.838&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:08:13.838&#43;08:00&#34;,&#34;name&#34;:&#34;测试项目&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:[],&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"2019-06-24T18:08:13.838+08:00\",\"mtime\":\"2019-06-24T18:08:13.838+08:00\",\"name\":\"测试项目\",\"cost\":0,\"budget\":0,\"start_time\":\"0001-01-01T00:00:00Z\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":[],\"status\":1}]}");
+                            document.getElementById('response-body-4-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="5top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-0" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T17:48:20.6968907&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T17:48:20.6968907+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-1" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T17:49:09.3366757&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T17:49:09.3366757+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-2" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T17:55:44.3119552&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T17:55:44.3119552+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-3" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T17:57:54.4526682&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T17:57:54.4526682+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-4" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T18:06:47.902588&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T18:06:47.902588+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-5-5" class="prettyprint">{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;status&#34;:2}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"name\":\"changed\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"status\":2}");
+                            document.getElementById('request-body-5-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-5-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d1095cb37bcd5575cc53bc6&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;changed&#34;,&#34;cost&#34;:0,&#34;budget&#34;:0,&#34;start_time&#34;:&#34;2019-06-24T18:08:14.0055358&#43;08:00&#34;,&#34;end_time&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;planning_days&#34;:120,&#34;planning_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:10},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:20},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:15}],&#34;real_workloads&#34;:null,&#34;status&#34;:2}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d1095cb37bcd5575cc53bc6\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"changed\",\"cost\":0,\"budget\":0,\"start_time\":\"2019-06-24T18:08:14.0055358+08:00\",\"end_time\":\"0001-01-01T00:00:00Z\",\"planning_days\":120,\"planning_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":10},{\"staff_name\":\"lisi\",\"workload\":20},{\"staff_name\":\"wangwu\",\"workload\":15}],\"real_workloads\":null,\"status\":2}}");
+                            document.getElementById('response-body-5-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="6top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-0" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}],&#34;time&#34;:&#34;2019-06-24T17:48:20.5407514&#43;08:00&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}],\"time\":\"2019-06-24T17:48:20.5407514+08:00\"}");
+                            document.getElementById('request-body-6-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T17:48:20.5407514&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T17:48:20.5407514+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-1" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}],&#34;time&#34;:&#34;2019-06-24T17:49:08.8170673&#43;08:00&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}],\"time\":\"2019-06-24T17:49:08.8170673+08:00\"}");
+                            document.getElementById('request-body-6-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T17:49:08.8170673&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T17:49:08.8170673+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-2" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}],&#34;time&#34;:&#34;2019-06-24T17:55:43.8541798&#43;08:00&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}],\"time\":\"2019-06-24T17:55:43.8541798+08:00\"}");
+                            document.getElementById('request-body-6-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T17:55:43.8541798&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T17:55:43.8541798+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-3" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}],&#34;time&#34;:&#34;2019-06-24T17:57:54.019858&#43;08:00&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}],\"time\":\"2019-06-24T17:57:54.019858+08:00\"}");
+                            document.getElementById('request-body-6-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T17:57:54.019858&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T17:57:54.019858+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-4" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}],&#34;time&#34;:&#34;2019-06-24T18:06:47.3959414&#43;08:00&#34;}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}],\"time\":\"2019-06-24T18:06:47.3959414+08:00\"}");
+                            document.getElementById('request-body-6-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T18:06:47.3959414&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T18:06:47.3959414+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-6-5" class="prettyprint">{&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}");
+                            document.getElementById('request-body-6-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-6-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;time&#34;:&#34;2019-06-24T18:08:14.0185004&#43;08:00&#34;,&#34;staff_workloads&#34;:[{&#34;staff_name&#34;:&#34;zhangsan&#34;,&#34;workload&#34;:2},{&#34;staff_name&#34;:&#34;lisi&#34;,&#34;workload&#34;:3},{&#34;staff_name&#34;:&#34;wangwu&#34;,&#34;workload&#34;:5}]}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"time\":\"2019-06-24T18:08:14.0185004+08:00\",\"staff_workloads\":[{\"staff_name\":\"zhangsan\",\"workload\":2},{\"staff_name\":\"lisi\",\"workload\":3},{\"staff_name\":\"wangwu\",\"workload\":5}]}}");
+                            document.getElementById('response-body-6-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="7top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-7-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:null}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":null}");
+                            document.getElementById('response-body-7-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="8top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-0" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-0">{&#34;status&#34;:false,&#34;msg&#34;:&#34;failed&#34;,&#34;data&#34;:null}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":false,\"msg\":\"failed\",\"data\":null}");
+                            document.getElementById('response-body-8-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-1" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:09.3576204&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:49:09.3576204&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:49:09.3576204+08:00\",\"mtime\":\"2019-06-24T17:49:09.3576204+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}}");
+                            document.getElementById('response-body-8-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-2" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:44.3508499&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:55:44.3508499&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:55:44.3508499+08:00\",\"mtime\":\"2019-06-24T17:55:44.3508499+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}}");
+                            document.getElementById('response-body-8-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-3" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.4835852&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:57:54.4835852&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:57:54.4835852+08:00\",\"mtime\":\"2019-06-24T17:57:54.4835852+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}}");
+                            document.getElementById('response-body-8-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-4" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.9414809&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:06:47.9414809&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T18:06:47.9414809+08:00\",\"mtime\":\"2019-06-24T18:06:47.9414809+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}}");
+                            document.getElementById('response-body-8-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-8-5" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"developer\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-8-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-8-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:14.0494175&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:08:14.0494175&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T18:08:14.0494175+08:00\",\"mtime\":\"2019-06-24T18:08:14.0494175+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}}");
+                            document.getElementById('response-body-8-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="9top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:22:51.577&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:22:51.577&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:22:51.577+08:00\",\"mtime\":\"2019-06-24T17:22:51.577+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-1">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:49:09.357&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:49:09.357&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:49:09.357+08:00\",\"mtime\":\"2019-06-24T17:49:09.357+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-1').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-2">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:55:44.35&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:55:44.35&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:55:44.35+08:00\",\"mtime\":\"2019-06-24T17:55:44.35+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-2').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-3">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T17:57:54.483&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T17:57:54.483&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T17:57:54.483+08:00\",\"mtime\":\"2019-06-24T17:57:54.483+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-3').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-4">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:06:47.941&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:06:47.941&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T18:06:47.941+08:00\",\"mtime\":\"2019-06-24T18:06:47.941+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-4').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+                
+                
+                
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-9-5">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:[{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;2019-06-24T18:08:14.049&#43;08:00&#34;,&#34;mtime&#34;:&#34;2019-06-24T18:08:14.049&#43;08:00&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;developer&#34;,&#34;status&#34;:1}]}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":[{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"2019-06-24T18:08:14.049+08:00\",\"mtime\":\"2019-06-24T18:08:14.049+08:00\",\"name\":\"weizijie\",\"job\":\"developer\",\"status\":1}]}");
+                            document.getElementById('response-body-9-5').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+        <div id="10top"  role="tabpanel" class="tab-pane col-md-10">
+            
+                
+                <p> <H4> Request Headers </H4> </p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td>  application/json; charset=utf-8</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                
+                <p> <H4> Request Body </H4> </p>
+                <pre id="request-body-10-0" class="prettyprint">{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;job&#34;:&#34;coder&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;status&#34;:1}</pre>
+                <script>
+                     
+                    var requestHeader ={"Content-Type":" application/json; charset=utf-8\r"};
+
+                    if (requestHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"_id\":\"5d10966b37bcd55434e92212\",\"job\":\"coder\",\"name\":\"weizijie\",\"status\":1}");
+                            document.getElementById('request-body-10-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <p><h4> Response Code</h4></p>
+                <pre class="prettyprint lang-json">200</pre>
+                
+                <p><h4> Response Headers</h4></p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    
+                    <tr>
+                        <td>Content-Type</td>
+                        <td> application/json; charset=UTF-8</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Vary</td>
+                        <td> Origin</td>
+                    </tr>
+                    
+                </table>
+                
+                
+                <p> <H4> Response Body </H4> </p>
+                <pre class="prettyprint" id="response-body-10-0">{&#34;status&#34;:true,&#34;msg&#34;:&#34;success&#34;,&#34;data&#34;:{&#34;_id&#34;:&#34;5d10966b37bcd55434e92212&#34;,&#34;ctime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;mtime&#34;:&#34;0001-01-01T00:00:00Z&#34;,&#34;name&#34;:&#34;weizijie&#34;,&#34;job&#34;:&#34;coder&#34;,&#34;status&#34;:1}}</pre>
+                <script>
+                     
+                    var responseHeader ={"Content-Type":"application/json; charset=UTF-8","Vary":"Origin"};
+
+                    if (responseHeader["Content-Type"].includes("application/json")){
+                        try {
+                            var jsonStr = spaceJson("{\"status\":true,\"msg\":\"success\",\"data\":{\"_id\":\"5d10966b37bcd55434e92212\",\"ctime\":\"0001-01-01T00:00:00Z\",\"mtime\":\"0001-01-01T00:00:00Z\",\"name\":\"weizijie\",\"job\":\"coder\",\"status\":1}}");
+                            document.getElementById('response-body-10-0').innerHTML = syntaxHighlight(jsonStr);
+                        } catch (e) {
+                             
+                        }
+                    }
+                </script>
+                
+                <hr>
+            
+        </div>
+        
+    </div>
+</div>
+</div>
+<hr>
+</body>
+</html>
