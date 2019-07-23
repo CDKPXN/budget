@@ -2,12 +2,12 @@ package main
 
 import (
 	"flag"
-	"kunpeng/budget-api/database"
-	"kunpeng/budget-api/models"
+	"budget-api/database"
+	"budget-api/models"
 	"os"
 	"testing"
 
-	"kunpeng/budget-api/config"
+	"budget-api/config"
 
 	"github.com/iris-contrib/httpexpect"
 	"github.com/kataras/iris"

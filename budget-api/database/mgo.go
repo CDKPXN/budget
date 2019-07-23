@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"kunpeng/budget-api/config"
+	"budget-api/config"
 
 	"gopkg.in/mgo.v2"
 )

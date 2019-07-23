@@ -1,7 +1,7 @@
 package models
 
 import (
-	"kunpeng/budget-api/database"
+	"budget-api/database"
 	"time"
 
 	"gopkg.in/mgo.v2/bson"

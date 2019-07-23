@@ -1,7 +1,7 @@
 package caches
 
 import (
-	"kunpeng/budget-api/config"
+	"budget-api/config"
 
 	"github.com/go-redis/redis"
 	toml "github.com/pelletier/go-toml"

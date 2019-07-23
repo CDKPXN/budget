@@ -1,11 +1,11 @@
 package main
 
 import (
-	"kunpeng/budget-api/config"
-	"kunpeng/budget-api/controllers"
+	"budget-api/config"
+	"budget-api/controllers"
 
 	// "kunpeng/budget-api/database"
-	"kunpeng/budget-api/middleware"
+	"budget-api/middleware"
 
 	"github.com/betacraft/yaag/yaag"
 	"github.com/iris-contrib/middleware/cors"

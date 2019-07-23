@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"fmt"
-	"kunpeng/budget-api/database"
-	"kunpeng/budget-api/models"
+	"budget-api/database"
+	"budget-api/models"
 
 	"github.com/kataras/iris"
 	validator "gopkg.in/go-playground/validator.v9"
