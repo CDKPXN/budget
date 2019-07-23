@@ -1,4 +1,4 @@
-.PHONY: build clean prepare update
+.PHONY: build clean test docker
 
 GO=CGO_ENABLED=0 GO111MODULE=on go
 
